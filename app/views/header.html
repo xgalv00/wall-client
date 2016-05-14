@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="app">Pizza Day</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse ">
+            <ul class="nav navbar-nav navbar-left">
+                <li ng-class="getClass('/')"><a ui-sref="app">
+                        <span class="glyphicon glyphicon-home"
+                              aria-hidden="true"></span> Home</a></li>
+                <li ng-class="getClass('/groups')"><a ui-sref="app.groups">
+                        <span class="glyphicon glyphicon-info-sign"
+                              aria-hidden="true"></span> Groups</a></li>
+                <li ng-class="getClass('/users')"><a ui-sref="app.users">
+                         <span class="glyphicon glyphicon-list-alt"
+                               aria-hidden="true"></span>
+                    Users</a></li>
+                <li ng-class="getClass('/contactus')"><a ui-sref="app.contactus">
+                    <i class="fa fa-envelope-o"></i> Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="app.login" ng-hide="$root.currentUser">Login</a></li>
+                    <li><a ui-sref="app.register" ng-hide="$root.currentUser">Sign up</a></li>
+                    <li><div class="header-user-name" ng-show="$root.currentUser" ng-bind="$root.currentUser | displayName"></div></li>
+                    <li><a ui-sref="app.logout" ng-show="$root.currentUser">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</nav>

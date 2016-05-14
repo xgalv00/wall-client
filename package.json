@@ -1,0 +1,23 @@
+{
+  "name": "wall-client",
+  "version": "1.0.0",
+  "description": "Client for wall app",
+  "main": "index.html",
+  "dependencies": {
+    "react": "^15.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xgalv00/wall-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xgalv00/wall-client/issues"
+  },
+  "homepage": "https://github.com/xgalv00/wall-client"
+}

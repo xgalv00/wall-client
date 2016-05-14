@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left">Available groups</h3>
+                    <button ng-if="$root.currentUser._id" class="btn btn-default pull-right" type="button"
+                            data-toggle="modal"
+                            data-target="#addGroupModal">Add group
+                    </button>
+                    <div class="clearfix"></div>
+                </div>
+                <ul class="media-list list-group">
+                    <li ng-repeat="group in groups" class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a class="remove-link-decoration" ui-sref="app.groupdetail({id: group._id})">
+                                    <div class="media">
+                                        <div class="media-left media-middle"
+                                             ng-if="group.image_url || group.image.url()">
+
+                                            <img class="media-object img-thumbnail"
+                                                 ng-src="{{group.image_url || group.image.url()}}" alt="{{group.name}}">
+
+                                        </div>
+                                        <div class="media-body">
+                                            <h2 class="media-heading">{{group.name}}</h2>
+
+                                            <p class="pull-right" title="Date of next event in this group">
+                                                {{group.event.date |
+                                                date:'MMM d, y'}}</p>
+
+                                            <p title="Group owner's email">{{group.owner | displayName}}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--modals-->
+    <div id="addGroupModal" class="modal" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">New Group</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addGroupForm" ng-submit="addGroup(newGroup)" novalidate>
+                        <div
+                                ng-class="{'has-error': addGroupForm.addGroupNameInput.$error.required && !addGroupForm.addGroupNameInput.$pristine}"
+                                class="form-group">
+                            <label for="addGroupNameInput" class="control-label">Group name:</label>
+                            <input type="text" class="form-control" name="addGroupNameInput" id="addGroupNameInput"
+                                   ng-model="newGroup.name" required>
+                            <span ng-show="addGroupForm.addGroupNameInput.$error.required && !addGroupForm.addGroupNameInput.$pristine"
+                                  class="help-block">Group name is required.</span>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <div ng-hide="imgSrc" ngf-drop ngf-select
+                                     ngf-change="addImages($files)"
+                                     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+                                     class="drop-box"
+                                     ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+                                     ngf-drop-available="dropAvailable">
+                                    <div>Click here to select image (jpg)</div>
+                                    <div>
+                                        <strong>OR</strong>
+                                    </div>
+                                    <div ng-show="dropAvailable">You can also drop image to here</div>
+                                </div>
+                                <div ng-show="imgSrc" class="ng-crop-container">
+                                    <img-crop image="imgSrc" result-image="myCroppedImage" result-image-size="100"
+                                              area-type="square"></img-crop>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                            </button>
+                            <input type="submit" class="btn btn-primary" ng-disabled="addGroupForm.$invalid"
+                                   value="Add Group">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,190 @@
+body {
+    align: center;
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
+    background: #fcfcfc url(images/bg.jpg) repeat;
+}
+
+.row-header {
+    margin: 0px auto;
+    padding: 0px 0px;
+}
+
+.row-content {
+    margin: 0px auto;
+    padding: 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+}
+
+.row-footer {
+    margin: 0px auto;
+    padding: 20px 0px;
+    background-color: #AfAfAf;
+}
+
+.carousel {
+    background: #1a237e;
+}
+
+.carousel .item {
+    height: 300px;
+}
+
+.carousel .item img {
+    left: 0;
+    min-height: 300px;
+    position: absolute;
+    top: 0;
+}
+
+address {
+    color: #0f0f0f;
+    font-size: 80%;
+    margin: 0px;
+}
+
+.tab-content {
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    padding: 10px;
+}
+
+.affix {
+    top: 100px;
+}
+
+#carouselButtons {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+}
+
+.leader-height {
+    height: 160px;
+}
+
+.vertical-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 80%;
+    padding-top: 8px;
+}
+
+a.remove-link-decoration {
+    color: #333;
+    text-decoration: none;
+}
+
+a.remove-link-decoration:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.oauth {
+    height: 50px;
+}
+
+.social-btn {
+    background: #db5a3c;
+    color: #fff;
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 18px;
+}
+
+.social-btn:hover {
+    background: #CA4C2E;
+}
+.at-sep {
+    height: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+
+.at-sep::before {
+    left: -60%;
+    display: block;
+    content: " ";
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    position: absolute;
+    top: 48%;
+}
+
+.at-sep::after {
+    right: -60%;
+    display: block;
+    content: " ";
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    position: absolute;
+    top: 48%;
+}
+
+.title {
+    text-align: center;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 230px;
+    height: 120px;
+    text-align: center;
+    padding-top: 25px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.drop-box.dragover {
+    border: 5px dashed blue;
+}
+
+.drop-box.dragover-err {
+    border: 5px dashed red;
+}
+
+.drop-box.dragover-err {
+    border: 5px dashed red;
+}
+
+.uploaded-image {
+    max-height: 100px;
+    max-width: 200px;
+}
+
+.ng-crop-container {
+    height: 350px;
+}
+
+.header-user-name {
+    color: #777;
+    padding-top: 15px;
+}
+.row-footer a {
+    font-size: 19px;
+    padding-right: 20px;
+}
+
+.row-footer a.btn-social-icon {
+    position: relative;
+    bottom: 4px;
+}

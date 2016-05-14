@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="at-form">
+
+                <div class="title">
+                    <h3>Sign In</h3>
+                </div>
+                <div ng-show="lc.error">
+                    {{ lc.error }}
+                </div>
+
+                <div class="oauth">
+
+                    <button class="btn social-btn" name="google" ng-click="lc.loginOAuth()">
+                        Sign In with Google
+                    </button>
+
+                </div>
+
+
+                <div class="at-sep">
+                    <strong>OR</strong>
+                </div>
+
+
+                <div class="at-pwd-form">
+                    <form name="loginForm" ng-submit="lc.login()" role="form" novalidate>
+                        <fieldset>
+                            <div 
+                                    ng-class="{ 'has-error' : (loginForm.email.$error.required || loginForm.email.$error.email) && !loginForm.email.$pristine }"
+                                    class="at-input form-group has-feedback">
+                                <label class="control-label" for="login-email">
+                                    Email
+                                </label>
+                                <input id="login-email" type="email" ng-model="lc.credentials.email"
+                                       class="form-control" name="email"
+                                       placeholder="Email" autocapitalize="none" autocorrect="off" required>
+
+                                <span ng-show="loginForm.email.$error.required && !loginForm.email.$pristine"
+                          class="help-block">Email is required.</span>
+
+                                <span ng-show="loginForm.email.$error.email && !loginForm.email.$pristine"
+                          class="help-block">Provide correct email</span>
+                            </div>
+
+
+                            <div 
+                                    ng-class="{ 'has-error' : loginForm.password.$error.required && !loginForm.password.$pristine }"
+                                    class="at-input form-group has-feedback">
+                                <label class="control-label" for="login-password">
+                                    Password
+                                </label>
+                                <input id="login-password" type="password" ng-model="lc.credentials.password"
+                                       class="form-control" name="password"
+                                       placeholder="Password" autocapitalize="none" autocorrect="off" required>
+
+                                <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine"
+                          class="help-block">Password is required.</span>
+                            </div>
+
+
+                            <div class="at-pwd-link">
+                                <p>
+
+                                    <a ui-sref="app.resetpw" class="at-link at-pwd">Forgot your
+                                        password?</a>
+
+                                </p>
+                            </div>
+
+                            <button type="submit" ng-disabled="loginForm.$invalid"
+                                    class="at-btn submit btn btn-lg btn-block btn-default">
+                                Sign In
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+
+
+                <div class="signup-link">
+                    <p>
+                        Don't have an account?
+                        <a ui-sref="app.register" class="at-link at-signup">Register</a>
+
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
