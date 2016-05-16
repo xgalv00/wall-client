@@ -14,25 +14,22 @@
                 <div class="at-pwd-form">
                     <form name="loginForm" ng-submit="lc.login()" role="form" novalidate>
                         <fieldset>
-                            <div 
-                                    ng-class="{ 'has-error' : (loginForm.email.$error.required || loginForm.email.$error.email) && !loginForm.email.$pristine }"
+                            <div
+                                    ng-class="{ 'has-error' : loginForm.username.$error.required && !loginForm.username.$pristine }"
                                     class="at-input form-group has-feedback">
-                                <label class="control-label" for="login-email">
-                                    Email
+                                <label class="control-label" for="login-username">
+                                    Username
                                 </label>
-                                <input id="login-email" type="email" ng-model="lc.credentials.email"
-                                       class="form-control" name="email"
+                                <input id="login-username" type="text" ng-model="lc.credentials.username"
+                                       class="form-control" name="username"
                                        placeholder="Email" autocapitalize="none" autocorrect="off" required>
 
-                                <span ng-show="loginForm.email.$error.required && !loginForm.email.$pristine"
-                          class="help-block">Email is required.</span>
-
-                                <span ng-show="loginForm.email.$error.email && !loginForm.email.$pristine"
-                          class="help-block">Provide correct email</span>
+                                <span ng-show="loginForm.username.$error.required && !loginForm.username.$pristine"
+                                      class="help-block">Username is required.</span>
                             </div>
 
 
-                            <div 
+                            <div
                                     ng-class="{ 'has-error' : loginForm.password.$error.required && !loginForm.password.$pristine }"
                                     class="at-input form-group has-feedback">
                                 <label class="control-label" for="login-password">
@@ -43,7 +40,7 @@
                                        placeholder="Password" autocapitalize="none" autocorrect="off" required>
 
                                 <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine"
-                          class="help-block">Password is required.</span>
+                                      class="help-block">Password is required.</span>
                             </div>
 
 

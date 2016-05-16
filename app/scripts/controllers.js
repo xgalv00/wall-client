@@ -1,4 +1,14 @@
 angular.module('pizzaDayApp')
+    .controller('ApplicationController', ['$scope', '$location', '$localStorage', 'AuthService', function ($scope, $location, $localStorage, AuthService) {
+        $scope.currentUser = null;
+        $scope.$storage = $localStorage;
+        $scope.setCurrentUser = function (user) {
+            $scope.currentUser = user;
+        };
+        $scope.isAuthenticated = function () {
+            return Boolean($scope.currentUser);
+        };
+    }])
     .controller('HeaderController', ['$scope', '$location', function ($scope, $location) {
         $scope.getClass = function (path) {
             var cssClass = '';
@@ -10,20 +20,29 @@ angular.module('pizzaDayApp')
             return cssClass;
         }
     }])
-    .controller("LoginCtrl", ['$state',
-        function ($state) {
+    .controller("LoginCtrl", ['$scope', '$rootScope', '$state', 'AUTH_EVENTS', 'AuthService',
+        function ($scope, $rootScope, $state, AUTH_EVENTS, AuthService) {
             var vm = this;
 
             vm.credentials = {
-                email: '',
+                username: '',
                 password: ''
             };
 
             vm.error = '';
 
             vm.login = function () {
-                console.log('call to login');
-            };
+                debugger;
+                AuthService.login(vm.credentials).then(function (res) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    $scope.$storage.token = res.data.key;
+                    $scope.setCurrentUser(res.data.user);
+                }, function (err) {
+                    vm.error = err.message;
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                });
+            }
+
         }
     ])
     .controller("RegisterCtrl", ['$state',
@@ -67,8 +86,20 @@ angular.module('pizzaDayApp')
     ])
     .controller('PostListController', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.posts = [
-            {name: "Test", author: "Author", image:"http://i.imgur.com/VBN5fJw.jpg", description: "Test description", date: new Date()},
-            {name: "Test1", author: "Author1", image:"http://i.imgur.com/VBN5fJw.jpg", description: "Test description", date: new Date()},
+            {
+                name: "Test",
+                author: "Author",
+                image: "http://i.imgur.com/VBN5fJw.jpg",
+                description: "Test description",
+                date: new Date()
+            },
+            {
+                name: "Test1",
+                author: "Author1",
+                image: "http://i.imgur.com/VBN5fJw.jpg",
+                description: "Test description",
+                date: new Date()
+            },
         ]
     }])
 ;

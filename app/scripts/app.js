@@ -1,5 +1,5 @@
-angular.module('pizzaDayApp', ['ui.router'])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, URLS) {
         // $locationProvider.html5Mode(true);
         $stateProvider
 

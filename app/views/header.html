@@ -20,10 +20,10 @@
             </ul>
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
-                    <li ng-class="getClass('/login')"><a ui-sref="app.login" ng-hide="$root.currentUser">Login</a></li>
-                    <li ng-class="getClass('/register')"><a ui-sref="app.register" ng-hide="$root.currentUser">Sign up</a></li>
-                    <li><div class="header-user-name" ng-show="$root.currentUser" ng-bind="$root.currentUser"></div></li>
-                    <li><a ui-sref="app.logout" ng-show="$root.currentUser">Logout</a></li>
+                    <li ng-class="getClass('/login')"><a ui-sref="app.login" ng-hide="currentUser">Login</a></li>
+                    <li ng-class="getClass('/register')"><a ui-sref="app.register" ng-hide="currentUser">Sign up</a></li>
+                    <li><div class="header-user-name" ng-show="currentUser" ng-bind="currentUser"></div></li>
+                    <li><a ui-sref="app.logout" ng-show="currentUser">Logout</a></li>
                 </ul>
             </div>
         </div>

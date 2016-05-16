@@ -12,14 +12,16 @@
     <link href="styles/main.css" rel="stylesheet">
 </head>
 
-<body>
+<body ng-controller="ApplicationController">
     <div ui-view="header"></div>
     <div ui-view="content"></div>
     <div ui-view="footer"></div>
 
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/constants.js"></script>
     <script src="scripts/controllers.js"></script>
     <script src="scripts/services.js"></script>
 
