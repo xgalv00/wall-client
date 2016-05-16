@@ -65,19 +65,30 @@ angular.module('pizzaDayApp')
 
         }
     ])
-    .controller("RegisterCtrl", ['$state',
-        function ($state) {
+    .controller("RegisterCtrl", ['$scope', '$rootScope', 'AUTH_EVENTS', '$state', 'AuthService',
+        function ($scope, $rootScope, AUTH_EVENTS, $state, AuthService) {
             var vm = this;
 
             vm.credentials = {
+                username: '',
                 email: '',
-                password: ''
+                password1: '',
+                password2: ''
             };
 
             vm.error = '';
 
             vm.register = function () {
-                console.log('call to register');
+                //TODO add password confirm match checking
+                // http://stackoverflow.com/questions/26842216/angularjs-password-confirmation-nomatch-not-working
+                AuthService.register(vm.credentials).then(function (res) {
+                    debugger;
+                    //TODO go to success registration page
+                    $state.go('app.login');
+                }, function (err) {
+                    //TODO replace by meaningful error handling
+                    vm.error = err.data.non_field_errors.join(' ');
+                });
             };
         }
     ])

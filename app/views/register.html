@@ -18,6 +18,20 @@
 
 
                             <div
+                                    ng-class="{ 'has-error' : registerForm.username.$error.required && !registerForm.username.$pristine }"
+                                    class="at-input form-group has-feedback">
+                                <label class="control-label" for="signup-username">
+                                    Username
+                                </label>
+                                <input id="signup-username" ng-model="rc.credentials.username"
+                                       type="text" class="form-control" name="username"
+                                       placeholder="Username" autocapitalize="none" autocorrect="off" required>
+
+                                <span ng-show="registerForm.username.$error.required && !registerForm.username.$pristine"
+                                      class="help-block">Username is required.</span>
+                            </div>
+
+                            <div
                                     ng-class="{ 'has-error' : (registerForm.email.$error.required || registerForm.email.$error.email) && !registerForm.email.$pristine }"
                                     class="at-input form-group has-feedback">
                                 <label class="control-label" for="signup-email">
@@ -36,17 +50,30 @@
 
 
                             <div
-                                    ng-class="{ 'has-error' : registerForm.password.$error.required && !registerForm.password.$pristine }"
+                                    ng-class="{ 'has-error' : registerForm.password1.$error.required && !registerForm.password1.$pristine }"
                                     class="at-input form-group has-feedback">
-                                <label class="control-label" for="signup-password">
+                                <label class="control-label" for="signup-password1">
                                     Password
                                 </label>
-                                <input id="signup-password" type="password" ng-model="rc.credentials.password"
-                                       class="form-control" name="password"
+                                <input id="signup-password1" type="password" ng-model="rc.credentials.password1"
+                                       class="form-control" name="password1"
                                        placeholder="Password" autocapitalize="none" autocorrect="off" required>
 
-                                <span ng-show="registerForm.password.$error.required && !registerForm.password.$pristine"
+                                <span ng-show="registerForm.password1.$error.required && !registerForm.password1.$pristine"
                                       class="help-block">Password is required.</span>
+                            </div>
+                            <div
+                                    ng-class="{ 'has-error' : registerForm.password2.$error.required && !registerForm.password2.$pristine }"
+                                    class="at-input form-group has-feedback">
+                                <label class="control-label" for="signup-password2">
+                                    Password confirm
+                                </label>
+                                <input id="signup-password2" type="password" ng-model="rc.credentials.password2"
+                                       class="form-control" name="password2"
+                                       placeholder="Password confirm" autocapitalize="none" autocorrect="off" required>
+
+                                <span ng-show="registerForm.password2.$error.required && !registerForm.password2.$pristine"
+                                      class="help-block">Password confirm is required.</span>
                             </div>
 
                             <button type="submit" ng-disabled="registerForm.$invalid"

@@ -11,6 +11,11 @@ angular.module('pizzaDayApp')
                     .post(URLS.domain + URLS.logout);
         };
         
+        authService.register = function (credentials) {
+            return $http
+                    .post(URLS.domain + URLS.register, credentials);
+        };
+        
 
         return authService;
     }])
