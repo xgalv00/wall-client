@@ -32,7 +32,7 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
                 }
             })
 
-            
+
 
             // route for the group detail page
             // .state('app.groupdetail', {
@@ -96,6 +96,17 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
             })
             .state('app.logout', {
                 url: 'logout',
+                controller: function ($scope, $http, URLS) {
+                    $http
+                    .post(URLS.domain + URLS.logout).then(function (res) {
+                        delete $scope.$storage.token;
+                        $scope.setCurrentUser(null)
+                    }, function (err) {
+                        console.log('Logout error');
+                        console.log(err);
+                    });
+                    
+                }
                 // resolve: {
                 //     "logout": function ($meteor, $state) {
                 //         return $meteor.logout().then(function () {

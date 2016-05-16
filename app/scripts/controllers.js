@@ -1,8 +1,14 @@
 angular.module('pizzaDayApp')
     .controller('ApplicationController', ['$scope', '$location', '$localStorage', 'AuthService', function ($scope, $location, $localStorage, AuthService) {
-        $scope.currentUser = null;
         $scope.$storage = $localStorage;
+        $scope.currentUser = $scope.$storage.user;
+        
         $scope.setCurrentUser = function (user) {
+            if (!user){
+                delete $scope.$storage.user;
+            }else{
+                $scope.$storage.user = user;
+            }
             $scope.currentUser = user;
         };
         $scope.isAuthenticated = function () {
@@ -32,13 +38,13 @@ angular.module('pizzaDayApp')
             vm.error = '';
 
             vm.login = function () {
-                debugger;
                 AuthService.login(vm.credentials).then(function (res) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $scope.$storage.token = res.data.key;
                     $scope.setCurrentUser(res.data.user);
                 }, function (err) {
-                    vm.error = err.message;
+                    //TODO replace by meaningful error handling
+                    vm.error = err.data.non_field_errors.join(' ');
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
             }
