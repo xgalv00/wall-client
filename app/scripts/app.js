@@ -97,6 +97,7 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
             .state('app.logout', {
                 url: 'logout',
                 controller: function ($scope, $http, URLS) {
+                    debugger;
                     $http
                     .post(URLS.domain + URLS.logout).then(function (res) {
                         delete $scope.$storage.token;

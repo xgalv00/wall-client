@@ -6,6 +6,11 @@ angular.module('pizzaDayApp')
             return $http
                 .post(URLS.domain + URLS.login, credentials);
         };
+        authService.logout = function () {
+            return $http
+                    .post(URLS.domain + URLS.logout);
+        };
+        
 
         return authService;
     }])

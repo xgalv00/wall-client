@@ -2,11 +2,11 @@ angular.module('pizzaDayApp')
     .controller('ApplicationController', ['$scope', '$location', '$localStorage', 'AuthService', function ($scope, $location, $localStorage, AuthService) {
         $scope.$storage = $localStorage;
         $scope.currentUser = $scope.$storage.user;
-        
+
         $scope.setCurrentUser = function (user) {
-            if (!user){
+            if (!user) {
                 delete $scope.$storage.user;
-            }else{
+            } else {
                 $scope.$storage.user = user;
             }
             $scope.currentUser = user;
@@ -14,6 +14,15 @@ angular.module('pizzaDayApp')
         $scope.isAuthenticated = function () {
             return Boolean($scope.currentUser);
         };
+        $scope.logout = function () {
+            AuthService.logout().then(function (res) {
+                delete $scope.$storage.token;
+                $scope.setCurrentUser(null)
+            }, function (err) {
+                console.log('Logout error');
+                console.log(err);
+            });
+        }
     }])
     .controller('HeaderController', ['$scope', '$location', function ($scope, $location) {
         $scope.getClass = function (path) {
@@ -28,6 +37,10 @@ angular.module('pizzaDayApp')
     }])
     .controller("LoginCtrl", ['$scope', '$rootScope', '$state', 'AUTH_EVENTS', 'AuthService',
         function ($scope, $rootScope, $state, AUTH_EVENTS, AuthService) {
+            //TODO add another auth checking for this view
+            if ($scope.currentUser) {
+                $state.go('app.posts');
+            }
             var vm = this;
 
             vm.credentials = {
@@ -42,6 +55,7 @@ angular.module('pizzaDayApp')
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $scope.$storage.token = res.data.key;
                     $scope.setCurrentUser(res.data.user);
+                    $state.go('app.posts')
                 }, function (err) {
                     //TODO replace by meaningful error handling
                     vm.error = err.data.non_field_errors.join(' ');
