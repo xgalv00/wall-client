@@ -14,21 +14,15 @@
                 <li ng-class="getClass('/')"><a ui-sref="app">
                         <span class="glyphicon glyphicon-home"
                               aria-hidden="true"></span> Home</a></li>
-                <li ng-class="getClass('/groups')"><a ui-sref="app.groups">
+                <li ng-class="getClass('/posts')"><a ui-sref="app.posts">
                         <span class="glyphicon glyphicon-info-sign"
-                              aria-hidden="true"></span> Groups</a></li>
-                <li ng-class="getClass('/users')"><a ui-sref="app.users">
-                         <span class="glyphicon glyphicon-list-alt"
-                               aria-hidden="true"></span>
-                    Users</a></li>
-                <li ng-class="getClass('/contactus')"><a ui-sref="app.contactus">
-                    <i class="fa fa-envelope-o"></i> Contact</a></li>
+                              aria-hidden="true"></span> Wall</a></li>
             </ul>
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="app.login" ng-hide="$root.currentUser">Login</a></li>
-                    <li><a ui-sref="app.register" ng-hide="$root.currentUser">Sign up</a></li>
-                    <li><div class="header-user-name" ng-show="$root.currentUser" ng-bind="$root.currentUser | displayName"></div></li>
+                    <li ng-class="getClass('/login')"><a ui-sref="app.login" ng-hide="$root.currentUser">Login</a></li>
+                    <li ng-class="getClass('/register')"><a ui-sref="app.register" ng-hide="$root.currentUser">Sign up</a></li>
+                    <li><div class="header-user-name" ng-show="$root.currentUser" ng-bind="$root.currentUser"></div></li>
                     <li><a ui-sref="app.logout" ng-show="$root.currentUser">Logout</a></li>
                 </ul>
             </div>

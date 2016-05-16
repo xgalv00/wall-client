@@ -21,47 +21,18 @@ angular.module('pizzaDayApp', ['ui.router'])
 
             })
 
-            // route for the group list page
-            .state('app.groups', {
-                url: 'groups',
+            // route for the wall page
+            .state('app.posts', {
+                url: 'posts',
                 views: {
                     'content@': {
-                        templateUrl: 'client/groups/groups-list/groups.ng.html',
-                        controller: 'GroupListController'
+                        templateUrl: 'views/posts.html',
+                        controller: 'PostListController'
                     }
                 }
             })
 
-            // route for the contactus page
-            .state('app.contactus', {
-                url: 'contactus',
-                views: {
-                    'content@': {
-                        templateUrl: 'client/views/contactus.ng.html'
-                    }
-                }
-            })
-
-            // route for the user list page
-            .state('app.users', {
-                url: 'users',
-                views: {
-                    'content@': {
-                        templateUrl: 'client/users/views/users.ng.html',
-                        controller: 'UserListController',
-                        resolve: {
-                            currentUser: ($q) => {
-                                if (Meteor.userId() == null) {
-                                    return $q.reject('AUTH_REQUIRED');
-                                }
-                                else {
-                                    return $q.resolve();
-                                }
-                            }
-                        }
-                    }
-                }
-            })
+            
 
             // route for the group detail page
             // .state('app.groupdetail', {
@@ -97,7 +68,7 @@ angular.module('pizzaDayApp', ['ui.router'])
                 url: 'login',
                 views: {
                     'content@': {
-                        templateUrl: 'client/users/views/login.ng.html',
+                        templateUrl: 'views/login.html',
                         controller: 'LoginCtrl',
                         controllerAs: 'lc'
                     }
@@ -107,7 +78,7 @@ angular.module('pizzaDayApp', ['ui.router'])
                 url: 'register',
                 views: {
                     'content@': {
-                        templateUrl: 'client/users/views/register.ng.html',
+                        templateUrl: 'views/register.html',
                         controller: 'RegisterCtrl',
                         controllerAs: 'rc'
                     }
@@ -117,7 +88,7 @@ angular.module('pizzaDayApp', ['ui.router'])
                 url: 'resetpw',
                 views: {
                     'content@': {
-                        templateUrl: 'client/users/views/reset-password.ng.html',
+                        templateUrl: 'views/reset-password.html',
                         controller: 'ResetCtrl',
                         controllerAs: 'rpc'
                     }
@@ -149,7 +120,7 @@ angular.module('pizzaDayApp', ['ui.router'])
             }
             if (error === 'GROUPS_REDIRECT') {
                 debugger;
-                $state.go('app.groups');
+                $state.go('app.posts');
             }
         });
     })
