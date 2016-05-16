@@ -12,6 +12,7 @@ angular.module('pizzaDayApp')
         domain: 'http://127.0.0.1:8000',
         login: '/rest-auth/login/',
         logout: '/rest-auth/logout/',
-        register: '/rest-auth/registration/'
+        register: '/rest-auth/registration/',
+        posts: '/posts/'
     })
 ;

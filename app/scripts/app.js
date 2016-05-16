@@ -1,5 +1,5 @@
-angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, URLS) {
+angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource'])
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, URLS, $resourceProvider) {
         // $locationProvider.html5Mode(true);
         $stateProvider
 
@@ -121,6 +121,7 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage'])
         ;
 
         $urlRouterProvider.otherwise('/');
+        $resourceProvider.defaults.stripTrailingSlashes = false;
     })
     .run(function ($rootScope, $state) {
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {

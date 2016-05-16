@@ -115,7 +115,10 @@ angular.module('pizzaDayApp')
             };
         }
     ])
-    .controller('PostListController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', function ($scope, $rootScope, $resource, URLS) {
+        var Posts = $resource(URLS.domain + URLS.posts, {},
+            {query: {method: 'GET', isArray: false}});
+        $scope.post_list = Posts.query();
         $scope.posts = [
             {
                 name: "Test",

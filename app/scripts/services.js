@@ -19,4 +19,10 @@ angular.module('pizzaDayApp')
 
         return authService;
     }])
+    .factory('PostsService', ['$resource', 'URLS', function ($resource, URLS) {
+        var postsService = {};
+
+
+        return postsService;
+    }])
 ;
