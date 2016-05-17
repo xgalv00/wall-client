@@ -115,25 +115,26 @@ angular.module('pizzaDayApp')
             };
         }
     ])
-    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', function ($scope, $rootScope, $resource, URLS) {
+    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', 'Upload', '$timeout', function ($scope, $rootScope, $resource, URLS, Upload, $timeout) {
         var Posts = $resource(URLS.domain + URLS.posts, {},
             {query: {method: 'GET', isArray: false}});
         $scope.post_list = Posts.query();
-        $scope.posts = [
-            {
-                name: "Test",
-                author: "Author",
-                image: "http://i.imgur.com/VBN5fJw.jpg",
-                description: "Test description",
-                date: new Date()
-            },
-            {
-                name: "Test1",
-                author: "Author1",
-                image: "http://i.imgur.com/VBN5fJw.jpg",
-                description: "Test description",
-                date: new Date()
-            },
-        ]
+        $scope.newPost = {};
+        $scope.addPost = function (newPost) {
+            newPost.image.upload = Upload.upload({
+                url: URLS.domain + URLS.posts,
+                data: {description: newPost.description, image: newPost.image},
+                headers: {'Authorization': 'Token ' + $scope.$storage.token}
+            });
+
+            newPost.image.upload.then(function (response) {
+                $timeout(function () {
+                    newPost.image.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            });
+        }
     }])
 ;

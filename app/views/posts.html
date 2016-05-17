@@ -1,4 +1,12 @@
 <div class="container">
+    <div class="row" ng-if="currentUser">
+        <div class="col-xs-12">
+            <button class="btn btn-default" type="button"
+                    data-toggle="modal"
+                    data-target="#addPostModal">Add post
+            </button>
+        </div>
+    </div>
     <div class="row row-content">
         <div class="col-xs-12">
             <ul class="media-list list-group">
@@ -36,7 +44,7 @@
         </div>
 
         <!--modals-->
-        <div id="addGroupModal" class="modal" tabindex="-1" role="dialog"
+        <div id="addPostModal" class="modal" tabindex="-1" role="dialog"
              aria-labelledby="mySmallModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -46,26 +54,35 @@
                         <h4 class="modal-title" id="exampleModalLabel">New Post</h4>
                     </div>
                     <div class="modal-body">
-                        <form name="addGroupForm" ng-submit="addGroup(newGroup)" novalidate>
+                        <div ng-show="errorMsg">
+                            {{ errorMsg }}
+                        </div>
+                        <form name="addPostForm" ng-submit="addPost(newPost)" novalidate>
                             <div
-                                    ng-class="{'has-error': addGroupForm.addGroupNameInput.$error.required && !addGroupForm.addGroupNameInput.$pristine}"
+                                    ng-class="{'has-error': addPostForm.addPostDescriptionInput.$error.required && !addPostForm.addPostDescriptionInput.$pristine}"
                                     class="form-group">
-                                <label for="addGroupNameInput" class="control-label">Group name:</label>
-                                <input type="text" class="form-control" name="addGroupNameInput" id="addGroupNameInput"
-                                       ng-model="newGroup.name" required>
-                            <span ng-show="addGroupForm.addGroupNameInput.$error.required && !addGroupForm.addGroupNameInput.$pristine"
-                                  class="help-block">Group name is required.</span>
+                                <label for="addPostDescriptionInput" class="control-label">Post description:</label>
+                                <input type="text" class="form-control" name="addPostDescriptionInput"
+                                       id="addPostDescriptionInput"
+                                       ng-model="newPost.description" required>
+                            <span ng-show="addPostForm.addPostDescriptionInput.$error.required && !addPostForm.addPostDescriptionInput.$pristine"
+                                  class="help-block">Post description is required.</span>
                             </div>
                             <div class="form-group">
-                                <div>
-                                    <p> Image goes here with crop or not</p>
-                                </div>
+                                <input type="file" ngf-select ng-model="newPost.image" name="image"
+                                       accept="image/*" ngf-max-size="2MB" required
+                                       ngf-model-invalid="errorFile">
+                                <i ng-show="addPostForm.image.$error.required">Image is required</i><br>
+                                <i ng-show="addPostForm.image.$error.maxSize">File too large
+                                    {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                                <img ng-show="addPostForm.image.$valid" ngf-thumbnail="newPost.image" class="thumb">
+                                <button ng-click="newPost.image = null" ng-show="newPost.image">Remove</button>
                             </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
                                 </button>
-                                <input type="submit" class="btn btn-primary" ng-disabled="addGroupForm.$invalid"
-                                       value="Add Group">
+                                <input type="submit" class="btn btn-primary" ng-disabled="addPostForm.$invalid"
+                                       value="Add Post">
                             </div>
                         </form>
                     </div>

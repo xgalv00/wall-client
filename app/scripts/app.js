@@ -1,4 +1,4 @@
-angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource'])
+angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUpload'])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, URLS, $resourceProvider) {
         // $locationProvider.html5Mode(true);
         $stateProvider
