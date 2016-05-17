@@ -136,7 +136,7 @@ angular.module('pizzaDayApp')
                     $scope.errorMsg = response.status + ': ' + response.data;
             });
         };
-
+        $scope.editedPost = {};
         $scope.openEditPost = function (_post) {
 
             var modalInstance = $uibModal.open({
@@ -159,8 +159,8 @@ angular.module('pizzaDayApp')
     .controller('EditModalInstanceCtrl', ['$scope', '$uibModalInstance', 'post', function ($scope, $uibModalInstance, post) {
         $scope.post = post;
         debugger;
-        $scope.editDish = function (dish_id, editedDish) {
-            editedDish._id = dish_id;
+        $scope.editPost = function (post_id, editedPost) {
+            debugger;
         };
 
         $scope.cancel = function () {

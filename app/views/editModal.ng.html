@@ -2,38 +2,38 @@
     <div class="modal-header">
         <button type="button" class="close" ng-click="cancel()" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Dish</h4>
+        <h4 class="modal-title">Edit Post</h4>
     </div>
     <div class="modal-body">
-        <form name="editDishForm" ng-submit="editDish(dish._id, editedDish)" novalidate>
+        <div ng-show="errorMsg">
+            {{ errorMsg }}
+        </div>
+        <form name="editPostForm" ng-submit="editPost(post._id, editedPost)" novalidate>
             <div
-                    ng-class="{ 'has-error' : editDishForm.editDishName.$error.required && !editDishForm.editDishName.$pristine }"
+                    ng-class="{'has-error': editPostForm.editPostDescriptionInput.$error.required && !editPostForm.editPostDescriptionInput.$pristine}"
                     class="form-group">
-                <label for="editGroupName" class="control-label">Dish name:</label>
-                <input type="text" class="form-control" name="editDishName" id="editGroupName" ng-model="editedDish.name"
-                       ng-init="editedDish.name=dish.name" required>
-                <span ng-show="editDishForm.editDishName.$error.required && !editDishForm.editDishName.$pristine"
-                          class="help-block">Dish name is required.</span>
-            </div>
-            <div
-                    ng-class="{ 'has-error' : (editDishForm.editDishPrice.$error.required || editDishForm.editDishPrice.$error.number || editDishForm.editDishPrice.$error.min) && !editDishForm.editDishPrice.$pristine }"
-                    class="form-group">
-                <label for="editDishPrice" class="control-label">Dish price:</label>
-                <input type="number" class="form-control" name="editDishPrice" id="editDishPrice" ng-model="editedDish.price"
-                       ng-init="editedDish.price=dish.price" min="0.01" required>
-                <span ng-show="editDishForm.editDishPrice.$error.required && !editDishForm.editDishPrice.$pristine"
-                          class="help-block">Dish price is required.</span>
-                <span ng-show="editDishForm.editDishPrice.$error.number && !editDishForm.editDishPrice.$pristine"
-                          class="help-block">Dish price should be a number.</span>
-                <span ng-show="editDishForm.editDishPrice.$error.min && !editDishForm.editDishPrice.$pristine"
-                          class="help-block">Dish price should be greater than 0.01</span>
+                <label for="editPostDescriptionInput" class="control-label">Post description:</label>
+                <input type="text" class="form-control" name="editPostDescriptionInput"
+                       id="editPostDescriptionInput"
+                       ng-model="editedPost.description"
+                       ng-init="editedPost.description=post.description" required>
+                            <span ng-show="editPostForm.editPostDescriptionInput.$error.required && !editPostForm.editPostDescriptionInput.$pristine"
+                                  class="help-block">Post description is required.</span>
             </div>
             <div class="form-group">
+                <input type="file" ngf-select ng-model="editedPost.image" ng-init="editedPost.image=post.image" name="image"
+                       accept="image/*" ngf-max-size="2MB" required
+                       ngf-model-invalid="errorFile">
+                <i ng-show="editPostForm.image.$error.required">Image is required</i><br>
+                <i ng-show="editPostForm.image.$error.maxSize">File too large
+                    {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                <img ng-show="editPostForm.image.$valid" ngf-thumbnail="editedPost.image" class="thumb">
+                <button ng-click="editedPost.image = null" ng-show="editedPost.image">Remove</button>
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-default" ng-click="cancel()">Close
                 </button>
-                <input type="submit" class="btn btn-primary" ng-disabled="editDishForm.$invalid" value="Edit dish">
+                <input type="submit" class="btn btn-primary" ng-disabled="editPostForm.$invalid" value="Edit post">
             </div>
         </form>
     </div>
