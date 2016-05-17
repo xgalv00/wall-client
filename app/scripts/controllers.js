@@ -115,7 +115,7 @@ angular.module('pizzaDayApp')
             };
         }
     ])
-    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', 'Upload', '$timeout', function ($scope, $rootScope, $resource, URLS, Upload, $timeout) {
+    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', 'Upload', '$timeout', '$uibModal', function ($scope, $rootScope, $resource, URLS, Upload, $timeout, $uibModal) {
         var Posts = $resource(URLS.domain + URLS.posts, {},
             {query: {method: 'GET', isArray: false}});
         $scope.post_list = Posts.query();
@@ -135,6 +135,36 @@ angular.module('pizzaDayApp')
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
             });
-        }
+        };
+
+        $scope.openEditPost = function (_post) {
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'editPostModalContent.html',
+                controller: 'EditModalInstanceCtrl',
+                resolve: {
+                    post: function () {
+                        return _post;
+                    }
+                }
+            });
+
+            // modalInstance.result.then(function (selectedItem) {
+            //     $scope.selected = selectedItem;
+            // }, function () {
+            //     $log.info('Modal dismissed at: ' + new Date());
+            // });
+        };
+    }])
+    .controller('EditModalInstanceCtrl', ['$scope', '$uibModalInstance', 'post', function ($scope, $uibModalInstance, post) {
+        $scope.post = post;
+        debugger;
+        $scope.editDish = function (dish_id, editedDish) {
+            editedDish._id = dish_id;
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
     }])
 ;

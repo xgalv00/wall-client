@@ -36,6 +36,13 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-info" ng-click="openEditPost(post)">
+                                <span class="glyphicon glyphicon-edit visible-xs"></span><span
+                                    class="hidden-xs">Edit</span></a>
+                        </div>
+                    </div>
 
                 </li>
             </ul>
@@ -89,6 +96,7 @@
                 </div>
             </div>
         </div>
+        <div ng-include src=" 'views/editModal.ng.html' "></div>
 
     </div>
 
