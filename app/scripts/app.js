@@ -137,18 +137,27 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUp
             }
         });
     })
-    .directive('pwCheck', [function () {
+    //directive from http://stackoverflow.com/a/18997012/1649855
+    //whole discussion from http://stackoverflow.com/questions/14012239/password-check-directive-in-angularjs
+    .directive('repeatPassword', [function () {
         return {
-            require: 'ngModel',
+            require: "ngModel",
             link: function (scope, elem, attrs, ctrl) {
-                var firstPassword = '#' + attrs.pwCheck;
-                elem.add(firstPassword).on('keyup', function () {
-                    scope.$apply(function () {
-                        // console.info(elem.val() === $(firstPassword).val());
-                        ctrl.$setValidity('pwmatch', elem.val() === $(firstPassword).val());
-                    });
+                var otherInput = elem.inheritedData("$formController")[attrs.repeatPassword];
+
+                ctrl.$parsers.push(function (value) {
+                    if (value === otherInput.$viewValue) {
+                        ctrl.$setValidity("repeat", true);
+                        return value;
+                    }
+                    ctrl.$setValidity("repeat", false);
+                });
+
+                otherInput.$parsers.push(function (value) {
+                    ctrl.$setValidity("repeat", value === ctrl.$viewValue);
+                    return value;
                 });
             }
-        }
+        };
     }])
 ;
