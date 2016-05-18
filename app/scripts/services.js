@@ -16,6 +16,11 @@ angular.module('pizzaDayApp')
                     .post(URLS.domain + URLS.register, credentials);
         };
         
+        authService.confirmEmail = function (key) {
+            return $http
+                    .post(URLS.domain + URLS.verify, {key: key});
+        };
+        
 
         return authService;
     }])

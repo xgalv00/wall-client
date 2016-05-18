@@ -13,6 +13,7 @@ angular.module('pizzaDayApp')
         login: '/rest-auth/login/',
         logout: '/rest-auth/logout/',
         register: '/rest-auth/registration/',
+        verify: '/rest-auth/registration/verify-email/',
         posts: '/posts/'
     })
 ;

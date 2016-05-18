@@ -84,6 +84,23 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUp
                     }
                 }
             })
+            .state('app.register.success', {
+                url: 'success',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/register-success.html',
+                    }
+                }
+            })
+            .state('app.verify', {
+                url: 'verify-email/:key',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/verify-email.html',
+                        controller: 'VerifyEmailCtrl'
+                    }
+                }
+            })
             .state('app.resetpw', {
                 url: 'resetpw',
                 views: {
@@ -108,15 +125,6 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUp
                     });
 
                 }
-                // resolve: {
-                //     "logout": function ($meteor, $state) {
-                //         return $meteor.logout().then(function () {
-                //             $state.go('app.groups');
-                //         }, function (err) {
-                //             console.log('logout error - ', err);
-                //         });
-                //     }
-                // }
             })
         ;
 
