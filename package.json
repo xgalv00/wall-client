@@ -4,11 +4,21 @@
   "description": "Client for wall app",
   "main": "index.html",
   "dependencies": {
+    "angular": "^1.5.5",
+    "angular-bootstrap": "^0.12.2",
+    "angular-resource": "^1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "ng-file-upload": "^12.0.4",
+    "ngstorage": "^0.3.10",
     "react": "^15.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --content-base app/"
   },
   "repository": {
     "type": "git",
