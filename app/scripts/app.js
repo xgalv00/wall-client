@@ -99,14 +99,14 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUp
                 controller: function ($scope, $http, URLS) {
                     debugger;
                     $http
-                    .post(URLS.domain + URLS.logout).then(function (res) {
+                        .post(URLS.domain + URLS.logout).then(function (res) {
                         delete $scope.$storage.token;
                         $scope.setCurrentUser(null)
                     }, function (err) {
                         console.log('Logout error');
                         console.log(err);
                     });
-                    
+
                 }
                 // resolve: {
                 //     "logout": function ($meteor, $state) {
@@ -137,4 +137,18 @@ angular.module('pizzaDayApp', ['ui.router', 'ngStorage', 'ngResource', 'ngFileUp
             }
         });
     })
+    .directive('pwCheck', [function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, elem, attrs, ctrl) {
+                var firstPassword = '#' + attrs.pwCheck;
+                elem.add(firstPassword).on('keyup', function () {
+                    scope.$apply(function () {
+                        // console.info(elem.val() === $(firstPassword).val());
+                        ctrl.$setValidity('pwmatch', elem.val() === $(firstPassword).val());
+                    });
+                });
+            }
+        }
+    }])
 ;

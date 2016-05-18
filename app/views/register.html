@@ -63,15 +63,19 @@
                                       class="help-block">Password is required.</span>
                             </div>
                             <div
-                                    ng-class="{ 'has-error' : registerForm.password2.$error.required && !registerForm.password2.$pristine }"
+                                    ng-class="{ 'has-error' : (registerForm.password2.$error.pwmatch || registerForm.password2.$error.required) && !registerForm.password2.$pristine }"
                                     class="at-input form-group has-feedback">
                                 <label class="control-label" for="signup-password2">
                                     Password confirm
                                 </label>
                                 <input id="signup-password2" type="password" ng-model="rc.credentials.password2"
                                        class="form-control" name="password2"
-                                       placeholder="Password confirm" autocapitalize="none" autocorrect="off" required>
-
+                                       placeholder="Password confirm" autocapitalize="none" autocorrect="off"
+                                       pw-check="signup-password1"
+                                       required>
+                                <span class="help-block" ng-show="registerForm.password2.$error.pwmatch && !registerForm.password2.$pristine && !registerForm.password1.$pristine">
+                                    Passwords don't match.
+                                  </span>
                                 <span ng-show="registerForm.password2.$error.required && !registerForm.password2.$pristine"
                                       class="help-block">Password confirm is required.</span>
                             </div>
