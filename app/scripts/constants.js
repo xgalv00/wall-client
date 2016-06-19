@@ -14,6 +14,6 @@ angular.module('pizzaDayApp')
         logout: '/rest-auth/logout/',
         register: '/rest-auth/registration/',
         verify: '/rest-auth/registration/verify-email/',
-        posts: '/posts/'
+        posts: '/posts/:id'
     })
 ;

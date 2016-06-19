@@ -8,26 +8,31 @@ angular.module('pizzaDayApp')
         };
         authService.logout = function () {
             return $http
-                    .post(URLS.domain + URLS.logout);
+                .post(URLS.domain + URLS.logout);
         };
-        
+
         authService.register = function (credentials) {
             return $http
-                    .post(URLS.domain + URLS.register, credentials);
+                .post(URLS.domain + URLS.register, credentials);
         };
-        
+
         authService.confirmEmail = function (key) {
             return $http
-                    .post(URLS.domain + URLS.verify, {key: key});
+                .post(URLS.domain + URLS.verify, {key: key});
         };
-        
+
 
         return authService;
     }])
-    .factory('PostsService', ['$resource', 'URLS', function ($resource, URLS) {
-        var postsService = {};
-
-
-        return postsService;
+    .factory('Post', ['$resource', 'URLS', function ($resource, URLS) {
+        return $resource(URLS.domain + URLS.posts, {id: '@_id'}, {
+            query: {
+                method: 'GET',
+                isArray: false
+            },
+            update: {
+                method: 'PUT' // this method issues a PUT request
+            }
+        });
     }])
 ;

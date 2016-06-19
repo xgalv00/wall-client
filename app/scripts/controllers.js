@@ -111,18 +111,19 @@ angular.module('pizzaDayApp')
             };
         }
     ])
-    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', 'Upload', '$timeout', '$uibModal', function ($scope, $rootScope, $resource, URLS, Upload, $timeout, $uibModal) {
-        var Posts = $resource(URLS.domain + URLS.posts, {},
-            {query: {method: 'GET', isArray: false}});
-        $scope.post_list = Posts.query();
-        $scope.newPost = {};
+    .controller('PostListController', ['$scope', '$rootScope', '$resource', 'URLS', 'Upload', '$timeout', '$uibModal', 'Post', function ($scope, $rootScope, $resource, URLS, Upload, $timeout, $uibModal, Post) {
+        $scope.post_list = Post.query();
+        $scope.post = new Post();
         $scope.addPost = function (newPost) {
+            //TODO understand how Upload works and how to call just $save
             newPost.image.upload = Upload.upload({
-                url: URLS.domain + URLS.posts,
+                //TODO look how to use url properly for new post creation and Post service
+                //some problem with :id part of Post service url
+                url: URLS.domain + '/posts/',
                 data: {description: newPost.description, image: newPost.image},
                 headers: {'Authorization': 'Token ' + $scope.$storage.token}
             });
-
+            //TODO review promises http://www.html5rocks.com/en/tutorials/es6/promises/
             newPost.image.upload.then(function (response) {
                 $timeout(function () {
                     newPost.image.result = response.data;
@@ -156,6 +157,7 @@ angular.module('pizzaDayApp')
         $scope.post = post;
         debugger;
         $scope.editPost = function (post_id, editedPost) {
+            //TODO call Post $update method
             debugger;
         };
 

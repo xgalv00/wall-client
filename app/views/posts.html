@@ -64,26 +64,26 @@
                         <div ng-show="errorMsg">
                             {{ errorMsg }}
                         </div>
-                        <form name="addPostForm" ng-submit="addPost(newPost)" novalidate>
+                        <form name="addPostForm" ng-submit="addPost(post)" novalidate>
                             <div
                                     ng-class="{'has-error': addPostForm.addPostDescriptionInput.$error.required && !addPostForm.addPostDescriptionInput.$pristine}"
                                     class="form-group">
                                 <label for="addPostDescriptionInput" class="control-label">Post description:</label>
                                 <input type="text" class="form-control" name="addPostDescriptionInput"
                                        id="addPostDescriptionInput"
-                                       ng-model="newPost.description" required>
+                                       ng-model="post.description" required>
                             <span ng-show="addPostForm.addPostDescriptionInput.$error.required && !addPostForm.addPostDescriptionInput.$pristine"
                                   class="help-block">Post description is required.</span>
                             </div>
                             <div class="form-group">
-                                <input type="file" ngf-select ng-model="newPost.image" name="image"
+                                <input type="file" ngf-select ng-model="post.image" name="image"
                                        accept="image/*" ngf-max-size="2MB" required
                                        ngf-model-invalid="errorFile">
                                 <i ng-show="addPostForm.image.$error.required">Image is required</i><br>
                                 <i ng-show="addPostForm.image.$error.maxSize">File too large
                                     {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                                <img ng-show="addPostForm.image.$valid" ngf-thumbnail="newPost.image" class="thumb">
-                                <button ng-click="newPost.image = null" ng-show="newPost.image">Remove</button>
+                                <img ng-show="addPostForm.image.$valid" ngf-thumbnail="post.image" class="thumb">
+                                <button ng-click="post.image = null" ng-show="post.image">Remove</button>
                             </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
